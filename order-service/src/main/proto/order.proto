@@ -1,0 +1,20 @@
+syntax = "proto3";
+package com.ntg.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.ntg.grpc";
+
+service OrderService {
+  rpc placeOrder(OrderRequest) returns (OrderResponse2);
+}
+
+message OrderRequest {
+  int32 productId = 1;
+  int32 quantity=2;
+}
+message OrderResponse2 {
+  int32 orderId = 1;
+  int32 totalPrice=2;
+
+}
+

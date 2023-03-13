@@ -1,0 +1,64 @@
+syntax = "proto3";
+//import "empty.proto";
+package com.ntg.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.ntg.grpc";
+
+service ProductService {
+  rpc greeting(GreetingRequest) returns (GreetingResponse) {}
+  rpc addProduct(ProductRequest) returns (stream ProductResponse) {}
+  rpc findOne(Id) returns (ProductResponse){}
+  rpc deleteOne(Id) returns (GreetingResponse){}
+  rpc productPage(PaginationRequest) returns (ProductPageResponse) {}
+  rpc order(OrderId)  returns (OrderResponse);
+//  rpc checkHealth(google.protobuf.Empty) returns (GreetingResponse){}
+
+}
+
+message GreetingRequest {
+  string message = 1;
+}
+
+message GreetingResponse {
+  string message = 1;
+}
+
+message ProductRequest {
+  string name=2;
+  string type=3;
+  string price=4;
+
+}
+message Id {
+  string id=1;
+
+}
+message ProductResponse {
+  string id=1;
+  string name=2;
+  string type=3;
+  string price=4;
+}
+message ProductPageResponse{
+  repeated ProductResponse productResponse=1;
+  int32 size = 2;
+  int32 totalElements = 3;
+  int32 totalPages = 4;
+  bool isFirst = 5;
+  bool isLast = 6;
+}
+message PaginationRequest {
+  double min = 1;
+  double max = 2;
+  int32 page = 3;
+  int32 size = 4;
+}
+message OrderId{
+  int32 id=1;
+}
+message OrderResponse {
+  int32 orderId = 1;
+  int32 totalPrice=2;
+
+}
